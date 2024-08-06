@@ -25,12 +25,17 @@ public class ApplicantService {
         String dayCode = addApplicantRequest.getStartTime().substring(0, 1);
 
         List<String> timeIntervals = timeUtil.splitTimeIntervals(startTime, endTime, dayCode);
-
-        Applicant applicant = Applicant.builder()
-                .name(addApplicantRequest.getName())
-                .part(addApplicantRequest.getPart())
-                .build();
-        applicantRepository.save(applicant);
+        Applicant applicant;
+        Applicant existApplicant = applicantRepository.findByName(addApplicantRequest.getName());
+        if (existApplicant == null) {
+            applicant = Applicant.builder()
+                    .name(addApplicantRequest.getName())
+                    .part(addApplicantRequest.getPart())
+                    .build();
+            applicantRepository.save(applicant);
+        } else {
+            applicant = existApplicant;
+        }
 
         List<AvailableTime> availableTimes = timeIntervals.stream()
                 .map(timeInterval -> AvailableTime.builder()
@@ -38,6 +43,7 @@ public class ApplicantService {
                         .code(timeInterval)
                         .build())
                 .collect(Collectors.toList());
+
         availableTimeRepository.saveAll(availableTimes);
     }
 }
