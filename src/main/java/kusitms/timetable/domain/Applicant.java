@@ -23,9 +23,17 @@ public class Applicant extends BaseEntity {
     @Column(name = "part", nullable = false)
     private String part;
 
+    @Column(name = "is_arrange", nullable = false)
+    private Boolean isArrange;
+
     @Builder
     public Applicant(String name, String part) {
         this.name = name;
         this.part = part;
+        this.isArrange = false;
+    }
+
+    public void arrange() {
+        this.isArrange = true;
     }
 }
