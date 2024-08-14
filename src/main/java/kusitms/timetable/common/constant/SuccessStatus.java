@@ -19,6 +19,8 @@ public enum SuccessStatus implements BaseCode {
     // Management
     _ADD_MANAGEMENT(HttpStatus.CREATED, "201", "운영진 정보 개인 등록에 성공했습니다."),
     _ADD_ALL_MANAGEMENTS(HttpStatus.CREATED, "201", "운영진 정보 일괄 등록에 성공했습니다."),
+    // Program
+    _RUN_PROGRAM(HttpStatus.OK, "200", "자동 배정 프로그램 실행에 성공했습니다."),
     ;
 
     private final HttpStatus httpStatus;
