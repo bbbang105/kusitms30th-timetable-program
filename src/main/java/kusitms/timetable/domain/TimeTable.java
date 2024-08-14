@@ -2,12 +2,9 @@ package kusitms.timetable.domain;
 
 import jakarta.persistence.*;
 import kusitms.timetable.common.BaseEntity;
-import kusitms.timetable.util.StringListConverter;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 @Entity
 @Getter
@@ -22,13 +19,20 @@ public class TimeTable extends BaseEntity {
     @Column(name = "code", nullable = false)
     private String code;
 
-    @Column(name = "applicants")
-    @Convert(converter = StringListConverter.class)
-    private List<String> applicants;
+    @Column(name = "part")
+    private String part;
 
-    @Column(name = "managements")
-    @Convert(converter = StringListConverter.class)
-    private List<String> managements;
+    @Column(name = "applicant_one")
+    private String applicantOne;
+
+    @Column(name = "applicant_two")
+    private String applicantTwo;
+
+    @Column(name = "management_one")
+    private String managementOne;
+
+    @Column(name = "management_two")
+    private String managementTwo;
 
     @Column(name = "guide")
     private String guide;
@@ -36,12 +40,24 @@ public class TimeTable extends BaseEntity {
     @Column(name = "place")
     private String place;
 
-    public void addApplicants(String applicant) {
-        this.applicants.add(applicant);
+    public void addPart(String part) {
+        this.part = part;
     }
 
-    public void addManagements(String managements) {
-        this.managements.add(managements);
+    public void addApplicantOne(String applicantOne) {
+        this.applicantOne = applicantOne;
+    }
+
+    public void addApplicantTwo(String applicantTwo) {
+        this.applicantTwo = applicantTwo;
+    }
+
+    public void addManagementOne(String managementOne) {
+        this.managementOne = managementOne;
+    }
+
+    public void addManagementTwo(String managementTwo) {
+        this.managementTwo = managementTwo;
     }
 
     public void addGuide(String guide) {
