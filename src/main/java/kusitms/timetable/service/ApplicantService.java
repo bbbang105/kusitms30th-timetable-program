@@ -26,11 +26,13 @@ public class ApplicantService {
 
         List<String> timeIntervals = timeUtil.splitTimeIntervals(startTime, endTime, dayCode);
         Applicant applicant;
-        Applicant existApplicant = applicantRepository.findByName(addApplicantRequest.getName());
+        String name = addApplicantRequest.getName();
+        String part = addApplicantRequest.getPart();
+        Applicant existApplicant = applicantRepository.findByNameAndPart(name, part);
         if (existApplicant == null) {
             applicant = Applicant.builder()
-                    .name(addApplicantRequest.getName())
-                    .part(addApplicantRequest.getPart())
+                    .name(name)
+                    .part(part)
                     .build();
             applicantRepository.save(applicant);
         } else {
