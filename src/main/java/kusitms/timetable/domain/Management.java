@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @Table(name = "managements")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Management extends BaseEntity {
+public class Management extends BaseEntity implements Comparable<Management> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "managements_id")
@@ -23,17 +23,30 @@ public class Management extends BaseEntity {
     @Column(name = "part", nullable = false)
     private String part;
 
-    @Column(name = "arrangement_count", nullable = false)
-    private int arrangementCount;
+    @Column(name = "guide_count", nullable = false)
+    private int guideCount;
+
+    @Column(name = "interview_count", nullable = false)
+    private int interviewCount;
 
     @Builder
     public Management(String name, String part) {
         this.name = name;
         this.part = part;
-        this.arrangementCount = 0;
+        this.guideCount = 0;
+        this.interviewCount = 0;
     }
 
     public void increaseArrangementCount() {
-        this.arrangementCount++;
+        this.guideCount++;
+    }
+
+    public void increaseInterviewCount() {
+        this.interviewCount++;
+    }
+
+    @Override
+    public int compareTo(Management other) {
+        return Integer.compare(this.guideCount + this.interviewCount, other.guideCount + this.interviewCount);
     }
 }
